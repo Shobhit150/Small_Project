@@ -8,7 +8,7 @@ class Dara_1():
         if self.quiz_level in ["easy","e"] :
             shuffle(self.bank)
             return self.bank[randint(0,4)]
-        elif self.quiz_levelin ["medium","m"]:
+        elif self.quiz_level in ["medium","m"]:
             shuffle(self.bank2)
             return self.bank2[randint(0,4)]
 bank=[[{"category":"Science: Computers","type":"boolean","difficulty":"easy","question":"Pointers were not used in the original C programming language; they were added later on in C++.","correct_answer":"F","incorrect_answers":["T"]},
