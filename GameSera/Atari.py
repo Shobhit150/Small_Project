@@ -1,12 +1,13 @@
 from ursina import *
 
 game = Ursina()
+
 skybox_image = load_texture("black.png")
 Sky(texture=skybox_image)
 window.fps_counter.enabled = False
 
 dx = -0.02
-dy = 0.02
+dy = -0.02
 score = 0
 dead = False
 
@@ -51,11 +52,7 @@ surface_right=Entity(model="cube",texture="black",scale=(0.5,1,0.5), position = 
 for i in range(-7,+8):
     surface.append(duplicate(surface_right, y=i))
 
-
-
-circle=Entity(model="sphere", color=color.green,scale=(0.2,0.2,0.2),  position= (0,0.6),collider="box")
-
-
+circle=Entity(model="sphere", color=color.green,scale=(0.2,0.2,0.2),  position= (0,0),collider="box")
 
 def update():
     global dx,dy,score,dead
@@ -79,11 +76,9 @@ def update():
     elif dead == False:
         if circle.y <= -4:
             dead=True
-
         circle.x += dx 
         circle.y += dy
         hit_info = hitter.intersects()
-
         if hit_info.entity in surface:
             hitter.x -= ( held_keys["left arrow"]) * time.dt * 5
         elif hit_info.entity in surface2:
@@ -93,11 +88,10 @@ def update():
         hit_info = circle.intersects()
         if hit_info.hit:
             if hit_info.entity == hitter:
-                if abs(circle.y - hitter.y) >= 0.3:
+                if abs(circle.y - hitter.y) >= 0.32:
                     dy = -dy
                     dx = dx
                 else:
-
                     dx = -dx
                     dy = dy
             if hit_info.entity in walls:
@@ -106,19 +100,18 @@ def update():
             if hit_info.entity in surface:
                 dy = dy
                 dx = -dx
-
             if hit_info.entity in surface2:
                 dy = dy
                 dx = -dx
             if hit_info.entity in scoring:
                 
                 score += 1
-                if abs(circle.y - hit_info.entity.y) >= 0.33:
+                if abs(circle.y - hit_info.entity.y) >= 0.32:
                     dy = -dy
                 else:
                     dx = -dx
                 destroy(hit_info.entity)
-        print_on_screen(f"Score: {score} {len(scoring)} ", position=(-0.81,0.445))
+        print_on_screen(f"Score: {score} ", position=(-0.81,0.445))
     else:
         for i in surface:
                 destroy(i)
