@@ -1,4 +1,3 @@
-
 class Quiz():
     
     def __init__(self,list1):
@@ -33,5 +32,7 @@ class Quiz():
             self.true_false_list1.append("❌")
         print(f"Your current score is print {self.score}/{self.question}")
         print()
+        
+        
         
         
